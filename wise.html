@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ENBD Strategic Response to Wise Entry</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+```
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #f5f5f5;
+        overflow-x: hidden;
+    }
+    
+    .presentation-container {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+    }
+    
+    .slide {
+        width: 1200px;
+        height: 675px;
+        background: white;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        display: none;
+        flex-direction: column;
+        position: relative;
+        padding: 60px 80px;
+    }
+    
+    .slide.active {
+        display: flex;
+    }
+    
+    .slide-header {
+        border-bottom: 3px solid #c41e3a;
+        padding-bottom: 20px;
+        margin-bottom: 40px;
+    }
+    
+    .slide-number {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .slide-title {
+        font-size: 36px;
+        color: #1a1a1a;
+        font-weight: 600;
+        line-height: 1.2;
+    }
+    
+    .slide-subtitle {
+        font-size: 18px;
+        color: #666;
+        margin-top: 10px;
+    }
+    
+    .content-section {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+    
+    .stat-box {
+        background: linear-gradient(135deg, #c41e3a 0%, #8b1529 100%);
+        color: white;
+        padding: 30px;
+        border-radius: 8px;
+        text-align: center;
+    }
+    
+    .stat-number {
+        font-size: 56px;
+        font-weight: 700;
+        margin-bottom: 10px;
+    }
+    
+    .stat-label {
+        font-size: 16px;
+        opacity: 0.9;
+    }
+    
+    .two-column {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+        margin-top: 20px;
+    }
+    
+    .three-column {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .insight-box {
+        background: #f8f9fa;
+        padding: 25px;
+        border-left: 4px solid #c41e3a;
+        border-radius: 4px;
+    }
+    
+    .insight-title {
+        font-size: 18px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 12px;
+    }
+    
+    .insight-text {
+        font-size: 14px;
+        color: #555;
+        line-height: 1.6;
+    }
+    
+    .action-item {
+        background: white;
+        border: 2px solid #e0e0e0;
+        padding: 20px;
+        border-radius: 8px;
+        transition: all 0.3s;
+    }
+    
+    .action-item:hover {
+        border-color: #c41e3a;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(196,30,58,0.1);
+    }
+    
+    .action-number {
+        display: inline-block;
+        width: 32px;
+        height: 32px;
+        background: #c41e3a;
+        color: white;
+        border-radius: 50%;
+        text-align: center;
+        line-height: 32px;
+        font-weight: 700;
+        font-size: 16px;
+        margin-bottom: 12px;
+    }
+    
+    .action-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 8px;
+    }
+    
+    .action-desc {
+        font-size: 13px;
+        color: #666;
+        line-height: 1.5;
+    }
+    
+    .timeline {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 20px;
+        position: relative;
+    }
+    
+    .timeline::before {
+        content: '';
+        position: absolute;
+        top: 20px;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: #e0e0e0;
+        z-index: 0;
+    }
+    
+    .timeline-item {
+        flex: 1;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+    }
+    
+    .timeline-dot {
+        width: 40px;
+        height: 40px;
+        background: #c41e3a;
+        border-radius: 50%;
+        margin: 0 auto 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: 700;
+        font-size: 14px;
+    }
+    
+    .timeline-label {
+        font-size: 13px;
+        font-weight: 600;
+        color: #1a1a1a;
+        margin-bottom: 8px;
+    }
+    
+    .timeline-desc {
+        font-size: 12px;
+        color: #666;
+        line-height: 1.4;
+    }
+    
+    .nav-buttons {
+        position: absolute;
+        bottom: 30px;
+        right: 30px;
+        display: flex;
+        gap: 10px;
+    }
+    
+    .nav-btn {
+        width: 45px;
+        height: 45px;
+        background: #c41e3a;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        font-size: 20px;
+        cursor: pointer;
+        transition: all 0.3s;
+    }
+    
+    .nav-btn:hover {
+        background: #8b1529;
+        transform: scale(1.1);
+    }
+    
+    .nav-btn:disabled {
+        background: #ccc;
+        cursor: not-allowed;
+        transform: scale(1);
+    }
+    
+    .slide-counter {
+        position: absolute;
+        bottom: 30px;
+        left: 80px;
+        font-size: 14px;
+        color: #999;
+    }
+    
+    .matrix {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .matrix-item {
+        padding: 25px;
+        border-radius: 8px;
+        border: 2px solid #e0e0e0;
+    }
+    
+    .matrix-item.defend {
+        background: #fff5f5;
+        border-color: #c41e3a;
+    }
+    
+    .matrix-item.invest {
+        background: #f0f9ff;
+        border-color: #0284c7;
+    }
+    
+    .matrix-item.optimize {
+        background: #f0fdf4;
+        border-color: #16a34a;
+    }
+    
+    .matrix-item.divest {
+        background: #fafafa;
+        border-color: #999;
+    }
+    
+    .matrix-header {
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .matrix-content {
+        font-size: 13px;
+        line-height: 1.6;
+        color: #444;
+    }
+    
+    ul {
+        margin-left: 20px;
+        margin-top: 8px;
+    }
+    
+    li {
+        margin-bottom: 6px;
+        font-size: 13px;
+        line-height: 1.5;
+    }
+    
+    .key-metric {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #e0e0e0;
+    }
+    
+    .key-metric:last-child {
+        border-bottom: none;
+    }
+    
+    .metric-label {
+        font-size: 14px;
+        color: #666;
+    }
+    
+    .metric-value {
+        font-size: 18px;
+        font-weight: 700;
+        color: #c41e3a;
+    }
+    
+    .highlight-box {
+        background: #fff9e6;
+        border-left: 4px solid #f59e0b;
+        padding: 20px;
+        margin-top: 20px;
+        border-radius: 4px;
+    }
+    
+    .highlight-title {
+        font-weight: 700;
+        color: #92400e;
+        margin-bottom: 8px;
+    }
+    
+    .highlight-text {
+        font-size: 14px;
+        color: #78350f;
+        line-height: 1.6;
+    }
+</style>
+```
+
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <div class="slide active">
+            <div class="slide-header">
+                <div class="slide-number">CONFIDENTIAL</div>
+                <div class="slide-title">Strategic Response to Wise Entry</div>
+                <div class="slide-subtitle">Defending ENBD's FX Market Leadership in the UAE</div>
+            </div>
+
+```
+        <div class="content-section" style="justify-content: center;">
+            <div class="three-column">
+                <div class="stat-box">
+                    <div class="stat-number">80-90%</div>
+                    <div class="stat-label">Lower margins vs. Wise pricing</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">$3-5B</div>
+                    <div class="stat-label">Annual FX volume at risk</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-number">18-24mo</div>
+                    <div class="stat-label">Window to respond effectively</div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">Strategic Imperative</div>
+                <div class="highlight-text">Wise's UAE license represents the most significant competitive threat to ENBD's FX business in a decade. With 9M expats and massive remittance flows, the UAE market is Wise's ideal target. Immediate strategic action required to defend market position and preserve profitability.</div>
+            </div>
+        </div>
+        
+        <div class="slide-counter">1 / 6</div>
+    </div>
+
+    <!-- Slide 2: The Threat Landscape -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">SITUATION ANALYSIS</div>
+            <div class="slide-title">The Competitive Threat</div>
+        </div>
+        
+        <div class="content-section">
+            <div class="two-column">
+                <div>
+                    <div class="insight-box">
+                        <div class="insight-title">Wise's Competitive Advantage</div>
+                        <div class="insight-text">
+                            <strong>85% cost advantage:</strong> 0.4-0.6% fees vs. ENBD's 2.5-4% spreads
+                            <br><br>
+                            <strong>Speed:</strong> 1-2 days vs. traditional 3-5 days
+                            <br><br>
+                            <strong>Transparency:</strong> Mid-market rates visible in real-time
+                            <br><br>
+                            <strong>Digital-first:</strong> Superior UX for tech-savvy expats
+                        </div>
+                    </div>
+                    
+                    <div class="insight-box" style="margin-top: 20px;">
+                        <div class="insight-title">Revenue Impact Projection</div>
+                        <div class="key-metric">
+                            <span class="metric-label">Year 1 Volume Loss</span>
+                            <span class="metric-value">8-12%</span>
+                        </div>
+                        <div class="key-metric">
+                            <span class="metric-label">Year 3 Volume Loss</span>
+                            <span class="metric-value">20-30%</span>
+                        </div>
+                        <div class="key-metric">
+                            <span class="metric-label">Potential Revenue Impact</span>
+                            <span class="metric-value">AED 400-700M</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="insight-box">
+                        <div class="insight-title">High-Risk Customer Segments</div>
+                        <div class="insight-text">
+                            <strong>1. Tech-Savvy Expat Professionals</strong><br>
+                            25-45 years, salary AED 15-50K/month, high digital adoption
+                            <br><br>
+                            <strong>2. SME Business Owners</strong><br>
+                            Regular international payments, price-sensitive, sophisticated
+                            <br><br>
+                            <strong>3. Freelancers & Gig Workers</strong><br>
+                            Multi-currency earnings, low loyalty, digitally native
+                            <br><br>
+                            <strong>4. Price-Conscious Remittance Users</strong><br>
+                            Indian, Pakistani, Filipino communities, high frequency
+                        </div>
+                    </div>
+                    
+                    <div class="insight-box" style="margin-top: 20px; background: #fff5f5;">
+                        <div class="insight-title" style="color: #c41e3a;">Critical Insight</div>
+                        <div class="insight-text">These segments represent 45-55% of ENBD's FX volume but 60-70% of profitability. Loss of this segment would require fundamental business model restructuring.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-counter">2 / 6</div>
+    </div>
+
+    <!-- Slide 3: Strategic Positioning Matrix -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">STRATEGIC FRAMEWORK</div>
+            <div class="slide-title">Customer Segment Strategy Matrix</div>
+        </div>
+        
+        <div class="content-section">
+            <div class="matrix">
+                <div class="matrix-item defend">
+                    <div class="matrix-header" style="color: #c41e3a;">DEFEND</div>
+                    <div class="matrix-content">
+                        <strong>Premium / HNW Clients</strong>
+                        <ul>
+                            <li>Relationship-based pricing (1.0-1.5% spread)</li>
+                            <li>Dedicated RM with 24/7 support</li>
+                            <li>Bundled wealth management services</li>
+                            <li>Exclusive lounges, events, concierge</li>
+                            <li>Target: Retain 95%+ of segment</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="matrix-item invest">
+                    <div class="matrix-header" style="color: #0284c7;">INVEST TO COMPETE</div>
+                    <div class="matrix-content">
+                        <strong>Mid-Market Professionals</strong>
+                        <ul>
+                            <li>Launch "ENBD Direct FX" at 0.8-1.2% spread</li>
+                            <li>Digital-only proposition with premium app</li>
+                            <li>Match Wise on speed and transparency</li>
+                            <li>Bundle with credit cards, loans, investments</li>
+                            <li>Target: Retain 70-75% of segment</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="matrix-item optimize">
+                    <div class="matrix-header" style="color: #16a34a;">OPTIMIZE & HARVEST</div>
+                    <div class="matrix-content">
+                        <strong>Traditional Branch Users</strong>
+                        <ul>
+                            <li>Maintain current pricing (2.5-3.5%)</li>
+                            <li>Focus on service quality and convenience</li>
+                            <li>Leverage physical presence advantage</li>
+                            <li>Target less tech-savvy, older demographics</li>
+                            <li>Target: Accept 10-15% attrition</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="matrix-item divest">
+                    <div class="matrix-header" style="color: #666;">STRATEGIC RETREAT</div>
+                    <div class="matrix-content">
+                        <strong>Low-Value, High-Frequency Users</strong>
+                        <ul>
+                            <li>Small remittances (<AED 2,000)</li>
+                            <li>Already low-margin after processing costs</li>
+                            <li>Allow Wise to capture this segment</li>
+                            <li>Redirect resources to higher-value services</li>
+                            <li>Target: Controlled exit from segment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box">
+                <div class="highlight-title">Strategic Principle</div>
+                <div class="highlight-text">We cannot compete on price for all segments. Success requires deliberate choices about where to compete aggressively, where to accept margin compression, and where to strategically exit. The goal is not to retain 100% market share, but to retain 100% of profitable customers.</div>
+            </div>
+        </div>
+        
+        <div class="slide-counter">3 / 6</div>
+    </div>
+
+    <!-- Slide 4: Five Strategic Pillars -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">STRATEGIC RESPONSE</div>
+            <div class="slide-title">Five Pillars of Competitive Defense</div>
+        </div>
+        
+        <div class="content-section">
+            <div class="two-column" style="grid-template-columns: 1fr 1fr; gap: 20px;">
+                <div class="action-item">
+                    <div class="action-number">1</div>
+                    <div class="action-title">Launch Digital FX Platform</div>
+                    <div class="action-desc">Create "ENBD FX Direct" - digital-only platform with 0.8-1.2% spreads, instant transfers, transparent pricing. White-label fintech infrastructure to compete on speed and UX.</div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">2</div>
+                    <div class="action-title">Ecosystem Lock-In Strategy</div>
+                    <div class="action-desc">Bundle FX with high-margin products (credit cards, mortgages, wealth management). Offer preferential FX rates tied to total relationship value. Increase switching costs.</div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">3</div>
+                    <div class="action-title">Corporate & SME Fortification</div>
+                    <div class="action-desc">Defend B2B segment with integrated trade finance, treasury services, multi-currency accounts, and API banking. Services Wise cannot replicate.</div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">4</div>
+                    <div class="action-title">Strategic Partnerships</div>
+                    <div class="action-desc">Partner with remittance corridors (India, Pakistan, Philippines) for competitive pricing. Consider minority investment in complementary fintechs. Explore Wise partnership for specific segments.</div>
+                </div>
+            </div>
+            
+            <div class="action-item" style="margin-top: 20px;">
+                <div class="action-number">5</div>
+                <div class="action-title">Margin Diversification & Value Migration</div>
+                <div class="action-desc">Accept 30-40% FX margin compression but compensate through: (a) Increased lending to FX customers at higher margins, (b) Cross-sell wealth management products, (c) Transaction banking fees, (d) Premium service tiers, (e) Treasury and hedging products for corporates. Shift from transactional to relationship profitability model.</div>
+            </div>
+        </div>
+        
+        <div class="slide-counter">4 / 6</div>
+    </div>
+
+    <!-- Slide 5: Implementation Roadmap -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">EXECUTION PLAN</div>
+            <div class="slide-title">18-Month Implementation Roadmap</div>
+        </div>
+        
+        <div class="content-section">
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">0-3M</div>
+                    <div class="timeline-label">IMMEDIATE</div>
+                    <div class="timeline-desc">
+                        • Reduce digital FX spreads to 1.5%<br>
+                        • Launch retention campaign for high-value customers<br>
+                        • Accelerate app improvements<br>
+                        • Task force established
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">3-6M</div>
+                    <div class="timeline-label">SHORT-TERM</div>
+                    <div class="timeline-desc">
+                        • Beta launch ENBD FX Direct<br>
+                        • Implement bundling strategy<br>
+                        • Partner with 2-3 remittance corridors<br>
+                        • Corporate API banking pilot
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">6-12M</div>
+                    <div class="timeline-label">MEDIUM-TERM</div>
+                    <div class="timeline-desc">
+                        • Full rollout FX Direct to 500K users<br>
+                        • Achieve 1.0% avg spread on digital<br>
+                        • Launch premium tiers<br>
+                        • Corporate treasury products live
+                    </div>
+                </div>
+                
+                <div class="timeline-item">
+                    <div class="timeline-dot">12-18M</div>
+                    <div class="timeline-label">LONG-TERM</div>
+                    <div class="timeline-desc">
+                        • Measure retention rates vs. targets<br>
+                        • Optimize product mix and margins<br>
+                        • Evaluate M&A opportunities<br>
+                        • Review strategic position
+                    </div>
+                </div>
+            </div>
+            
+            <div class="two-column" style="margin-top: 40px;">
+                <div class="insight-box">
+                    <div class="insight-title">Investment Required</div>
+                    <div class="insight-text">
+                        <strong>Technology & Platform:</strong> AED 80-120M<br>
+                        <strong>Marketing & Acquisition:</strong> AED 40-60M<br>
+                        <strong>Margin Compression Impact:</strong> AED 200-300M (Y1)<br>
+                        <strong>Total Investment:</strong> AED 320-480M over 18 months
+                    </div>
+                </div>
+                
+                <div class="insight-box">
+                    <div class="insight-title">Expected Outcomes</div>
+                    <div class="insight-text">
+                        <strong>Market Share Retention:</strong> 75-80% (vs. 55-65% if no action)<br>
+                        <strong>Customer Retention:</strong> 85% of high-value segment<br>
+                        <strong>New Revenue Streams:</strong> AED 150-250M annually by Year 3<br>
+                        <strong>ROI:</strong> Positive by Month 24, strong by Year 3
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-counter">5 / 6</div>
+    </div>
+
+    <!-- Slide 6: Recommendations -->
+    <div class="slide">
+        <div class="slide-header">
+            <div class="slide-number">EXECUTIVE RECOMMENDATIONS</div>
+            <div class="slide-title">Critical Actions for Leadership Team</div>
+        </div>
+        
+        <div class="content-section">
+            <div class="insight-box" style="background: #c41e3a; color: white; border: none;">
+                <div class="insight-title" style="color: white; font-size: 20px;">Board-Level Recommendations</div>
+                <div class="insight-text" style="color: white; font-size: 15px;">
+                    Approve AED 320-480M investment over 18 months to defend FX market leadership. The alternative—inaction—will result in 30-40% FX revenue erosion (AED 600-900M annually) and permanent loss of high-value customer relationships. This is not optional; it is existential for ENBD's transaction banking business.
+                </div>
+            </div>
+            
+            <div class="three-column" style="margin-top: 25px;">
+                <div class="action-item">
+                    <div class="action-number">1</div>
+                    <div class="action-title">Immediate Authorization</div>
+                    <div class="action-desc">
+                        <strong>Within 2 weeks:</strong><br>
+                        • Approve budget and resources<br>
+                        • Form cross-functional task force<br>
+                        • Appoint dedicated C-suite sponsor<br>
+                        • Fast-track decision-making authority<br>
+                        • Weekly exec steering committee
+                    </div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">2</div>
+                    <div class="action-title">Strategic Priorities</div>
+                    <div class="action-desc">
+                        <strong>Focus areas:</strong><br>
+                        • Launch digital FX platform in 3-6 months<br>
+                        • Defend premium customer segment aggressively<br>
+                        • Accept margin compression on 40% of volume<br>
+                        • Strategic exit from low-value segments<br>
+                        • Build new revenue streams
+                    </div>
+                </div>
+                
+                <div class="action-item">
+                    <div class="action-number">3</div>
+                    <div class="action-title">Success Metrics</div>
+                    <div class="action-desc">
+                        <strong>Monthly KPI tracking:</strong><br>
+                        • FX volume market share<br>
+                        • Customer retention by segment<br>
+                        • Average spread by channel<br>
+                        • Cross-sell penetration rates<br>
+                        • Digital platform adoption<br>
+                        • NPS vs. Wise
+                    </div>
+                </div>
+            </div>
+            
+            <div class="highlight-box" style="margin-top: 25px;">
+                <div class="highlight-title">Bottom Line</div>
+                <div class="highlight-text" style="font-size: 15px;">
+                    <strong>The next 6 months are critical.</strong> Wise will aggressively acquire customers during their launch phase. ENBD must move with speed and conviction to defend market position. Success requires accepting lower margins in exchange for higher volumes, stronger customer relationships, and new revenue streams. The banking industry globally has learned this lesson—UAE banks are now facing the same disruption. Those who adapt quickly will thrive; those who don't will see permanent erosion of their core business.
+                </div>
+            </div>
+        </div>
+        
+        <div class="slide-counter">6 / 6</div>
+    </div>
+
+    <!-- Navigation -->
+    <div class="nav-buttons">
+        <button class="nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>‹</button>
+        <button class="nav-btn" id="nextBtn" onclick="changeSlide(1)">›</button>
+    </div>
+</div>
+
+<script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    function showSlide(n) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        slides[n].classList.add('active');
+        
+        prevBtn.disabled = n === 0;
+        nextBtn.disabled = n === slides.length - 1;
+        
+        document.querySelectorAll('.slide-counter').forEach((counter, index) => {
+            counter.textContent = `${index + 1} / ${slides.length}`;
+        });
+    }
+
+    function changeSlide(direction) {
+        currentSlide += direction;
+        if (currentSlide < 0) currentSlide = 0;
+        if (currentSlide >= slides.length) currentSlide = slides.length - 1;
+        showSlide(currentSlide);
+    }
+
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+        if (e.key === 'ArrowRight') changeSlide(1);
+    });
+
+    showSlide(0);
+</script>
+```
+
+</body>
+</html>
